@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -92,7 +93,7 @@ public class LoginFRM extends AppCompatActivity {
         String userUsername = LtxtEmail.getText().toString().trim();
         String userPassword = LtxtPassword.getText().toString().trim();
 
-        reference.child("user_registration").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean loginSuccessful = false;
@@ -109,6 +110,10 @@ public class LoginFRM extends AppCompatActivity {
                         String username = user.getUsername();
                         String randomUserId = userSnapshot.getKey();
 
+                        Log.d("YourTag", "Random User ID: " + randomUserId);
+
+
+
                         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("randomUserId", randomUserId);
@@ -119,6 +124,7 @@ public class LoginFRM extends AppCompatActivity {
                         intent.putExtra("name", name);
                         intent.putExtra("email", email);
                         intent.putExtra("username", username);
+                        intent.putExtra("randomUserId", randomUserId);
                         startActivity(intent);
                         finish(); // Finish the LoginActivity to prevent going back to it with the back button
                         break; // Exit the loop since we found a match

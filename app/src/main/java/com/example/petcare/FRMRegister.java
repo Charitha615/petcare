@@ -73,7 +73,7 @@ public class FRMRegister extends AppCompatActivity {
                     String randomUserId = UUID.randomUUID().toString();
 
                     HelperClass helperClass = new HelperClass(name,email,PhoneNumber,username,password);
-                    reference.child("users").child("user_registration").child(randomUserId).setValue(helperClass);
+                    reference.child("users").child(randomUserId).setValue(helperClass);
 
                     Toast.makeText(FRMRegister.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(FRMRegister.this, LoginFRM.class);

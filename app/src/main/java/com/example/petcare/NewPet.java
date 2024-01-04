@@ -1,7 +1,11 @@
 package com.example.petcare;
 
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +44,10 @@ public class NewPet extends AppCompatActivity {
         String category = categoryEditText.getText().toString();
         String petAgeStr = petAgeEditText.getText().toString();
         String ownerName = ownerNameEditText.getText().toString();
-        String userId = "001";
+
+        Intent intent = getIntent();
+        String userId = intent.getStringExtra("randomUserId");
+
 
         // Check if any field is empty
         if (petName.isEmpty() || category.isEmpty() || petAgeStr.isEmpty() || ownerName.isEmpty() || userId.isEmpty()) {
