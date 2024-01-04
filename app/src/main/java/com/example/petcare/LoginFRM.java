@@ -115,7 +115,7 @@ public class LoginFRM extends AppCompatActivity {
                         editor.apply();
 
                         // Pass this data to the MainActivity using Intent
-                        Intent intent = new Intent(LoginFRM.this, MainActivity.class);
+                        Intent intent = new Intent(LoginFRM.this, NewPet.class);
                         intent.putExtra("name", name);
                         intent.putExtra("email", email);
                         intent.putExtra("username", username);
