@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
@@ -18,8 +19,9 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginFRM extends AppCompatActivity {
 
-    Button Lbtnregister,LbtnLogin;
+    Button LbtnLogin;
     TextInputEditText LtxtEmail, LtxtPassword;
+    TextView LtxtRegister;
 
     public static final String ERROR_EMPTY_USERNAME = "Username cannot be empty";
     public static final String ERROR_EMPTY_PASSWORD = "Password cannot be empty";
@@ -30,14 +32,12 @@ public class LoginFRM extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_frm);
 
-        Lbtnregister = findViewById(R.id.Lbtnregister);
         LbtnLogin = findViewById(R.id.LbtnLogin);
         LtxtEmail = findViewById(R.id.LtxtEmail);
         LtxtPassword = findViewById(R.id.LtxtPassword);
+        LtxtRegister = findViewById(R.id.txtbuttonCreateAccount);
 
-
-
-        Lbtnregister.setOnClickListener(new View.OnClickListener() {
+        LtxtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginFRM.this, FRMRegister.class);
