@@ -49,21 +49,25 @@ public class LoginFRM extends AppCompatActivity {
         LbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameError = validateUsername();
-                String passwordError = validatePassword();
 
-                if (usernameError != null) {
-                    LtxtEmail.setError(usernameError);
-                }
+                Intent intent = new Intent(LoginFRM.this, MainActivity.class);
+                startActivity(intent);
 
-                if (passwordError != null) {
-                    LtxtPassword.setError(passwordError);
-                }
-
-                if (usernameError == null && passwordError == null) {
-                    // Validation successful, proceed with login
-                    checkUser();
-                }
+//                String usernameError = validateUsername();
+//                String passwordError = validatePassword();
+//
+//                if (usernameError != null) {
+//                    LtxtEmail.setError(usernameError);
+//                }
+//
+//                if (passwordError != null) {
+//                    LtxtPassword.setError(passwordError);
+//                }
+//
+//                if (usernameError == null && passwordError == null) {
+//                    // Validation successful, proceed with login
+//                    checkUser();
+//                }
             }
         });
     }
@@ -120,14 +124,14 @@ public class LoginFRM extends AppCompatActivity {
                         editor.apply();
 
                         // Pass this data to the MainActivity using Intent
-                        Intent intent = new Intent(LoginFRM.this, NewPet.class);
+                        Intent intent = new Intent(LoginFRM.this, MainActivity.class);
                         intent.putExtra("name", name);
                         intent.putExtra("email", email);
                         intent.putExtra("username", username);
                         intent.putExtra("randomUserId", randomUserId);
                         startActivity(intent);
-                        finish(); // Finish the LoginActivity to prevent going back to it with the back button
-                        break; // Exit the loop since we found a match
+                        finish();
+                        break;
                     }
                 }
 

@@ -1,12 +1,13 @@
 package com.example.petcare;
 
 import static androidx.core.content.ContentProviderCompat.requireContext;
-
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,6 +36,9 @@ public class NewPet extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 savePetData();
+
+                Intent intent = new Intent(NewPet.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -45,37 +49,31 @@ public class NewPet extends AppCompatActivity {
         String petAgeStr = petAgeEditText.getText().toString();
         String ownerName = ownerNameEditText.getText().toString();
 
-        Intent intent = getIntent();
-        String userId = intent.getStringExtra("randomUserId");
+        SharedPreferences sharedPreferences = this.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        String userId = sharedPreferences.getString("randomUserId", "");
+
+        Log.d("randomUserIduserId",userId);
+        Log.d("petName",petName);
 
 
-        // Check if any field is empty
         if (petName.isEmpty() || category.isEmpty() || petAgeStr.isEmpty() || ownerName.isEmpty() || userId.isEmpty()) {
-            // Handle the error, for example, show a Toast
             return;
         }
 
-        // Convert petAge from String to int
         int petAge;
         try {
             petAge = Integer.parseInt(petAgeStr);
         } catch (NumberFormatException e) {
-            // Handle the case where petAge is not a valid integer
-            e.printStackTrace(); // Print the stack trace for debugging
-            // You might want to show a Toast or log an error message here
+            e.printStackTrace();
             return;
         }
 
-        // Create a reference to the "pets" node in Firebase
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
 
-        // Create a new Pet object with the entered data
         Pet pet = new Pet(petName, category, petAge, ownerName, userId);
 
-        // Use the reference to push the data to the database
         databaseReference.push().setValue(pet);
 
-        // Optionally, you can also add an OnSuccessListener and OnFailureListener to handle the result
     }
 
 }
