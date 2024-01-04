@@ -21,6 +21,17 @@ public class MyAdapter extends RecyclerView.Adapter<PetViewHolder> {
     Context context;
     List<Pet> items;
 
+
+    private OnItemClickListener onItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(String itemId);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
     public MyAdapter(Context context, List<Pet> items) {
         this.context = context;
         this.items = items;
@@ -37,6 +48,16 @@ public class MyAdapter extends RecyclerView.Adapter<PetViewHolder> {
     public void onBindViewHolder(@NonNull PetViewHolder holder, int position) {
         holder.petName.setText(items.get(position).getPetName());
         holder.category.setText(items.get(position).getCategory());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(items.get(position).getItemKey());
+                }
+            }
+        });
+
         holder.setOnDeleteClickListener(new PetViewHolder.OnDeleteClickListener() {
             @Override
             public void onDeleteClick(int position) {
