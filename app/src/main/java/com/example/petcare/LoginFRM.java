@@ -94,11 +94,10 @@ public class LoginFRM extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
 
-//        String userUsername = LtxtEmail.getText().toString().trim();
-//        String userPassword = LtxtPassword.getText().toString().trim();
+        String userUsername = LtxtEmail.getText().toString().trim();
+        String userPassword = LtxtPassword.getText().toString().trim();
 
-        String userUsername = "c@gmail.com";
-        String userPassword = "123";
+
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
