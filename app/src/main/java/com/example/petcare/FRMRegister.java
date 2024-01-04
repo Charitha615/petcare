@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,6 +22,8 @@ public class FRMRegister extends AppCompatActivity {
 
     TextInputEditText txtName, txtUserName,txtemail,txtPhoneNumber,txtpassword;
     Button btnReg;
+
+    TextView LtxtLogin;
 
     FirebaseDatabase database;
     DatabaseReference reference;
@@ -36,6 +39,18 @@ public class FRMRegister extends AppCompatActivity {
         txtPhoneNumber = findViewById(R.id.txtPhoneNumber);
         txtpassword = findViewById(R.id.txtpassword);
         btnReg = findViewById(R.id.btnReg);
+        LtxtLogin = findViewById(R.id.textbuttonLogin);
+
+
+        LtxtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FRMRegister.this, LoginFRM.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
