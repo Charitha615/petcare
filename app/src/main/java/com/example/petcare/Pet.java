@@ -1,6 +1,8 @@
 package com.example.petcare;
 
-public class Pet {
+import java.io.Serializable;
+
+public class Pet implements Serializable {
     public String petName;
     public String category;
     public int petAge;
@@ -15,6 +17,47 @@ public class Pet {
         this.category = category;
         this.petAge = petAge;
         this.ownerName = ownerName;
+        this.userId = userId;
+    }
+
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public int getPetAge() {
+        return petAge;
+    }
+
+    public void setPetAge(int petAge) {
+        this.petAge = petAge;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

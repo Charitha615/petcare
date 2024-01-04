@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".PetDetails"
     app:cardCornerRadius="6dp"
     android:elevation="6dp"
@@ -61,6 +61,7 @@
                 android:layout_width="173dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginRight="5dp"
                 android:text="Delete"
                 android:textAllCaps="false" />

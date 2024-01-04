@@ -19,11 +19,15 @@ public class MainActivity extends AppCompatActivity {
         Newpetcard = findViewById(R.id.newpetcard);
         PetDetailscard = findViewById(R.id.petDetailscard);
 
+        Intent intent = getIntent();
+        String randomUserId = intent.getStringExtra("randomUserId");
+
 
         Newpetcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewPet.class);
+                intent.putExtra("randomUserId", randomUserId);
                 startActivity(intent);
                 Toast.makeText(MainActivity.this,"Add New Pets", Toast.LENGTH_SHORT).show();
             }

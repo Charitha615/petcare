@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,21 +49,25 @@ public class LoginFRM extends AppCompatActivity {
         LbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String usernameError = validateUsername();
-                String passwordError = validatePassword();
 
-                if (usernameError != null) {
-                    LtxtEmail.setError(usernameError);
-                }
+                Intent intent = new Intent(LoginFRM.this, MainActivity.class);
+                startActivity(intent);
 
-                if (passwordError != null) {
-                    LtxtPassword.setError(passwordError);
-                }
-
-                if (usernameError == null && passwordError == null) {
-                    // Validation successful, proceed with login
-                    checkUser();
-                }
+//                String usernameError = validateUsername();
+//                String passwordError = validatePassword();
+//
+//                if (usernameError != null) {
+//                    LtxtEmail.setError(usernameError);
+//                }
+//
+//                if (passwordError != null) {
+//                    LtxtPassword.setError(passwordError);
+//                }
+//
+//                if (usernameError == null && passwordError == null) {
+//                    // Validation successful, proceed with login
+//                    checkUser();
+//                }
             }
         });
     }
@@ -92,7 +97,7 @@ public class LoginFRM extends AppCompatActivity {
         String userUsername = LtxtEmail.getText().toString().trim();
         String userPassword = LtxtPassword.getText().toString().trim();
 
-        reference.child("user_registration").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 boolean loginSuccessful = false;
@@ -109,19 +114,24 @@ public class LoginFRM extends AppCompatActivity {
                         String username = user.getUsername();
                         String randomUserId = userSnapshot.getKey();
 
+                        Log.d("YourTag", "Random User ID: " + randomUserId);
+
+
+
                         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("randomUserId", randomUserId);
                         editor.apply();
 
                         // Pass this data to the MainActivity using Intent
-                        Intent intent = new Intent(LoginFRM.this, NewPet.class);
+                        Intent intent = new Intent(LoginFRM.this, MainActivity.class);
                         intent.putExtra("name", name);
                         intent.putExtra("email", email);
                         intent.putExtra("username", username);
+                        intent.putExtra("randomUserId", randomUserId);
                         startActivity(intent);
-                        finish(); // Finish the LoginActivity to prevent going back to it with the back button
-                        break; // Exit the loop since we found a match
+                        finish();
+                        break;
                     }
                 }
 
