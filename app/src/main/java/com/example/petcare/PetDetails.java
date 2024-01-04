@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -33,8 +34,18 @@ public class PetDetails extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        loadPetData();
+        // Set item click listener
+        adapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String itemId) {
+                // Handle item click, navigate to another page with the item ID
+                Intent intent = new Intent(PetDetails.this, EditPetActivity.class);
+                intent.putExtra("itemId", itemId);
+                startActivity(intent);
+            }
+        });
 
+        loadPetData();
     }
     private void loadPetData() {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");

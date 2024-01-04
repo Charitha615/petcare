@@ -9,6 +9,16 @@ public class Pet implements Serializable {
     public String ownerName;
     public String userId;
 
+    private String itemKey;
+
+    public String getItemKey() {
+        return itemKey;
+    }
+
+    public void setItemKey(String itemKey) {
+        this.itemKey = itemKey;
+    }
+
     // Add an empty constructor for Firebase
     public Pet() {}
 

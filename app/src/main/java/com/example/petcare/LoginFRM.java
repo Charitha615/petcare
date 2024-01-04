@@ -97,6 +97,8 @@ public class LoginFRM extends AppCompatActivity {
         String userUsername = LtxtEmail.getText().toString().trim();
         String userPassword = LtxtPassword.getText().toString().trim();
 
+
+
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
