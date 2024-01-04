@@ -69,10 +69,10 @@ public class NewPet extends AppCompatActivity {
         }
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("pets");
-
+        String newItemKey = databaseReference.push().getKey();
         Pet pet = new Pet(petName, category, petAge, ownerName, userId);
-
-        databaseReference.push().setValue(pet);
+        pet.setItemKey(newItemKey);
+        databaseReference.child(newItemKey).setValue(pet);
 
     }
 
